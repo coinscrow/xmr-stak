@@ -1,7 +1,4 @@
 dist: trusty
-
-osx_image: xcode8.3
-
 sudo: false
 
 language: cpp
@@ -38,59 +35,8 @@ matrix:
       env:
         - CMAKE_CXX_COMPILER=g++-5
         - CMAKE_C_COMPILER=gcc-5
-        - XMRSTAK_CMAKE_FLAGS="-DCUDA_ARCH=30 -DOpenCL_ENABLE=OFF"
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - *default_packages
-            - gcc-6
-            - g++-6
-      env:
-        - CMAKE_CXX_COMPILER=g++-6
-        - CMAKE_C_COMPILER=gcc-6
-        - XMRSTAK_CMAKE_FLAGS="-DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF"
-
-    # test with disabled HWLOC, MICROHTTPD, OpenSSL and no accelerators
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - *default_packages
-            - gcc-6
-            - g++-6
-      env:
-        - CMAKE_CXX_COMPILER=g++-6
-        - CMAKE_C_COMPILER=gcc-6
-        - XMRSTAK_CMAKE_FLAGS="-DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF -DHWLOC_ENABLE=OFF -DOpenSSL_ENABLE=OFF -DMICROHTTPD_ENABLE=OFF"
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - *default_packages
-            - gcc-7
-            - g++-7
-      env:
-        - CMAKE_CXX_COMPILER=g++-7
-        - CMAKE_C_COMPILER=gcc-7
-        - XMRSTAK_CMAKE_FLAGS="-DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF"
-
-    - os: osx
-      compiler: gcc
-      env:
-        - XMRSTAK_CMAKE_FLAGS="-DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF"
-
+        - XMRSTAK_CMAKE_FLAGS=""
+        
 before_install:
   - . CI/checkPRBranch
   - if [ $TRAVIS_OS_NAME = osx ] ; then
